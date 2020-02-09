@@ -1,0 +1,39 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+<!--Não está aparecendo. somente extendendo de model-page.html-->
+    <h2>Cronogramas</h2>  
+
+    <h2>Olá Confidence Chronogram</h2>
+      <ul style="font-size: 18px;">
+        {% for chronogram in chronograms %}
+            <li>{{ chronogram.construction }} - 
+            {{ chronogram.client }} -
+            {{ chronogram.get_date_chronogram }}
+            <br> <br>
+            </li>
+        {% endfor %}
+      </ul>
+  <!-- <a href="evento/">
+      <button type="button">Novo </button>
+    </a>
+    <ul style="font-size: 20px">
+        {% for task in tasks %} 
+          <li>
+            <div {% if task.get_tarefa_atrasada %}
+                    style="color:red"
+                 {% endif %}>
+              {{ task.task_text  }} - {{  task.get_start_date }} 
+                <a href="task/?id={{ task.id }}" style="text-decoration:none">
+                <button type="button">Editar</button>
+                </a>
+                <a href="task/delete/{{ task.id }}/">
+                <button type="button">Deletar</button>
+                </a>
+            </div>
+          </li>
+          <br>
+        {% endfor %}
+    </ul>
+  -->
+{% endblock%}

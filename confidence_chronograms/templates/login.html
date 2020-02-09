@@ -1,0 +1,30 @@
+<!--Login é uma página única-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="submit" method="POST">{% csrf_token %}
+        <div align="left">
+            &emsp;&emsp;
+            <label>Usuário:</label>
+            <input type="text" name="username">
+            <label>Password:</label>
+            <input type="password" name="password">
+            <button type="submit">Entrar</button>
+        </div>
+    </form>
+<!--
+    {% for message in messages %}
+      <br>
+      <div align="left">
+        &emsp;&emsp; 
+        <strong>Erro: </strong>{{ message }}
+      </div>
+    {% endfor %}
+-->
+</body>
+</html>
