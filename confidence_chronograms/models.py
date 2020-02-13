@@ -20,7 +20,7 @@ class Chronogram(models.Model):
 
     def get_date_chronogram(self):
 
-        return self.date_added.strftime('%d-%m-%Y')
+        return self.date_added.strftime('%d/%m/%Y %H h : %M min')
 
 
 # UM CRONOGRAMA TEM VÁRIAS TAREFAS.
@@ -28,9 +28,9 @@ class Task(models.Model):
     """Tarefa específica do cronograma."""
     chronogram = models.ForeignKey(Chronogram, on_delete=models.PROTECT)
     task_text = models.TextField(verbose_name = 'Dscrição da Tarefa')
-    price = models.CharField(verbose_name = 'Valor', max_length=20)
-    start_date = models.CharField(verbose_name = 'Inicio', max_length=10)
-    end_date = models.CharField(verbose_name = 'Termino', max_length=10)
+    price = models.DecimalField(verbose_name = 'Valor', max_digits=10,decimal_places=4)
+    start_date = models.DateTimeField(verbose_name = 'Inicio')
+    end_date = models.DateTimeField(verbose_name = 'Termino')
     duration = models.CharField(verbose_name = 'Duração', max_length=30)
     date_added = models.DateTimeField(verbose_name = 'Data de criação', auto_now_add=True)
 

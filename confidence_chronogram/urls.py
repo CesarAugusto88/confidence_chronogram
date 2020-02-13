@@ -22,5 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('chronogram/', views.list_chronograms),
     #path('', views.index)
-    path('', RedirectView.as_view(url='/chronogram/'))
+    path('', RedirectView.as_view(url='/chronogram/')),
+    path('login/', views.login_user),
+    path('login/submit', views.submit_login),
+    path('logout/', views.logout_user)
 ]
