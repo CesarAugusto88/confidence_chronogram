@@ -1,10 +1,47 @@
 {% extends "model-page.html" %}
 
 {% block content %}
+{% load static %}
 
-<h2>Tarefas</h2>
+<h2>Tarefas</h2><!--o que esta atribuido na tabela chronogram aparece aqui-->
+<form action="submit" method="POST">{% csrf_token %}
+    <fieldset>
+        <fieldset class="grupo">
 
-<<!-- form action="submit" method="POST">{% csrf_token %}
+            <div class="campo">
+                <label for="chronogram">Cronograma</label>
+                <input type="text" id="chronogram" name="nome" style="width: 10em" value="">
+            </div>
+            <div class="campo">
+                <label for="task_text">Tarefa</label>
+                <input type="text" id="task_text" name="task_text" style="width: 10em" value="">
+            </div>
+        </fieldset>
+        
+        <div class="campo">
+            <label for="price">Preço</label>
+            <input type="number" id="price" name="price" style="width: 20em" value="">
+        </div>
+        <fieldset>
+            <div class="campo">
+                <label for="start_date">Data Inicial</label>
+                <input type="datetime-local" id="start_date" name="start_date" style="width: 10em" value="">
+            </div>
+            <div class="campo">
+                <label for="end_date">Data Final</label>
+                <input type="datetime-local" id="end_date" name="end_date" style="width: 10em" value="">
+            </div>
+            <div class="campo">
+                <label for="duration"></label>Duração</label>
+                <input type="text" id="duration" name="duration" style="width: 10em" value="">
+            </div>
+        </fieldset>
+        
+        <button type="submit" name="submit">Enviar</button>
+    </fieldset>
+</form>
+
+<!-- <form action="submit" method="POST">{% csrf_token %}
     <label>Texto:</label>
     <input type="number" name="id_evento" value="{{ task.id }}" hidden>
     <br>

@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
-from confidence_chronograms.models import Chronogram
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from datetime import datetime, timedelta
-from django.http.response import Http404, JsonResponse
-from django.contrib.auth.models import User
+# from confidence_chronograms.models import Chronogram
+# from datetime import datetime, timedelta
+# from django.http.response import Http404, JsonResponse
+# from django.contrib.auth.models import User
+import json
+from confidence_chronograms.models import Task
 
-from confidence_chronograms.models import Chronogram
 
 #def index(request):
 #    return redirect('/chronogram/')
@@ -33,13 +34,62 @@ def submit_login(request):
     return redirect('/')
 
 @login_required(login_url='/login/')
-def list_chronograms(request):
-    """ retorna cronogramas
-    """
-    usuario = request.user
-    chronogram = Chronogram.objects.filter(usuario=usuario)
-    # comando 'for' no html -> for chronogram in chronograms:
-    dados = {'chronograms': chronogram}
+def list_chronogram(request):
+    """ retorna o cronograma com às tarefas (javascript)
+    Mostrar o caminho crítico das atividades do cronograma: Atividades que não podem
+      atrasar - As atividades ja vão estar no limite.
+    Mostrar a porcentagem da conclusão das atividades para o cliente ter uma visão. javascript?
+    Mostrar a porcentagem do valor investido conforme o valor total do models Chronogram.
     
-    #return HttpResponse('Olá Django')
+    Exemplo como pegar tarefa do models com usuário específico:
+
+    usuario = request.user
+    tasks = [{ ...}]
+
+    task = Task.objects.filter(usuario=usuario,
+                               task_text=tasks...)
+    dados = {'tasks':task}
     return render(request, 'chronogram.html', dados)
+    """
+
+    # usar variáveis do models Task para usar aqui.
+    # Usando listcompression pegando todas as tarefas que está em Task usando
+    #  a função to_dict()...
+    tasks = [t.to_dict() for t in Task.objects.all()]
+
+
+    # tasks = [
+    #     {
+    #         "id": "1",
+    #         "name": "Instalações preliminares de água e energia",
+    #         "start": "2020-02-19",
+    #         "end": "2020-02-21",
+    #         "progress": "100",
+    #         #"dependencies": "",
+    #         "custom_class": "bar-milestone" # optional
+    #     },
+    #     {
+    #         "id": "2",
+    #         "name": "Fechamento da Construção",
+    #         "start": "2020-02-22",
+    #         "end": "2020-02-27",
+    #         "progress": "20",
+    #         "dependencies": "1",
+    #         "custom_class": "bar-milestone" # optional
+    #     },
+    #     {
+    #         "id": "3",
+    #         "name": "Gabaríto da Obra",
+    #         "start": "2020-02-24",
+    #         "end": "2020-03-20",
+    #         "progress": "20",
+    #         "dependencies": "2",
+    #         "custom_class": "bar-milestone" # optional
+    #     },
+    # ]
+
+    context = {
+        "tasks": json.dumps(tasks),
+    }
+
+    return render(request, "chronogram.html", context)

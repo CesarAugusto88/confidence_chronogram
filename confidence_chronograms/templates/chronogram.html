@@ -1,39 +1,67 @@
+
 {% extends "model-page.html" %}
 
 {% block content %}
-<!--Não está aparecendo. somente extendendo de model-page.html-->
-    <h2>Cronogramas</h2>  
+{% load static %}
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'frappe-gantt.css' %}">
+      
+  </head>
+  <body>
+    <svg id="chronogram"></svg>
+    <script src="{% static 'frappe-gantt.min.js' %}"></script>
+  
+  <!--Ver se é possível colocar variáveis como colunas de nomes e valores das tarefas/atividades/etapas 
+      Em views (tasks) ou aqui.-->
+  
+  <script>
+    var tasks = {% autoescape off %} {{ tasks }} {% endautoescape %};
+    var options = {
+      header_height: 50,
+      column_width: 30,
+      step: 24,
+      view_modes: ['Quarter Day', 'Half Day', 'Day', 'Week', 'Month', 'Year'],
+      bar_height: 20,
+      bar_corner_radius: 3,
+      arrow_curve: 5,
+      padding: 18,
+      view_mode: 'Day',   
+      date_format: 'YYYY-MM-DD',
+      custom_popup_html: null,
+    }
 
-    <h2>Olá Confidence Chronogram</h2>
-      <ul style="font-size: 18px;">
-        {% for chronogram in chronograms %}
-            <li><b>Tipo de Estrutura:</b> {{ chronogram.construction }} - 
-            {{ chronogram.client }} -
-            {{ chronogram.get_date_chronogram }}
-            <br> <br>
-            </li>
-        {% endfor %}
-      </ul>
-  <!-- <a href="evento/">
-      <button type="button">Novo </button>
-    </a>
-    <ul style="font-size: 20px">
-        {% for task in tasks %} 
-          <li>
-            <div {% if task.get_tarefa_atrasada %}
-                    style="color:red"
-                 {% endif %}>
-              {{ task.task_text  }} - {{  task.get_start_date }} 
-                <a href="task/?id={{ task.id }}" style="text-decoration:none">
-                <button type="button">Editar</button>
-                </a>
-                <a href="task/delete/{{ task.id }}/">
-                <button type="button">Deletar</button>
-                </a>
-            </div>
-          </li>
-          <br>
-        {% endfor %}
-    </ul>
-  -->
-{% endblock%}
+    /*Essas funções onclick abaixo de javascript não foram criadas...
+      Criar funções para mostrar datas, progresso... Ou pega do DB e mostar */
+    var gantt = new Gantt("#chronogram", tasks, {
+    on_click: function (tasks) {
+        console.log(tasks);
+    },
+    on_date_change: function(tasks, start, end) {
+        console.log(tasks, start, end);
+    },
+    on_progress_change: function(tasks, progress) {
+        console.log(tasks, progress);
+    },
+    on_view_change: function(mode) {
+        console.log(mode);
+    }});
+    
+  </script>
+
+  <!--criar botões para visualizar como dias, semanas, meses:
+      gantt.change_view_mode('Week'); -->
+  <script src="{% static 'main.js' %}"></script>
+
+    <button type="button" onclick="days()">Days</button>
+    <button type="button" onclick="weeks()">Weeks</button>
+    <button type="button" onclick="months()">Months</button>
+    <button type="button" onclick="years()">Years</button>  
+
+  </body>
+</html>
+
+{% endblock %}

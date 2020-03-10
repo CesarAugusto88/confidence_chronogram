@@ -1,0 +1,62 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+{% load static %}
+<h2>Cliente - Exemplo Tarefas</h2>
+
+<form action="submit" method="POST">{% csrf_token %}
+    <fieldset>
+        <fieldset class="grupo">
+
+            <div class="campo">
+                <label for="chronogram">Cronograma</label>
+                <input type="text" id="chronogram" name="nome" style="width: 10em" value="">
+            </div>
+            <div class="campo">
+                <label for="task_text">Tarefa</label>
+                <input type="text" id="task_text" name="task_text" style="width: 10em" value="">
+            </div>
+        </fieldset>
+        <div class="campo">
+            <label>Sexo</label>
+            <label>
+                <input type="radio" name="sexo" value="masculino"> Masculino
+            </label>
+            <label>
+                <input type="radio" name="sexo" value="feminino"> Feminino
+            </label>
+        </div>
+        <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" style="width: 20em" value="">
+        </div>
+        <div class="campo">
+            <label for="telefone">Telefone</label>
+            <input type="text" id="telefone" name="telefone" style="width: 10em" value="">
+        </div>
+
+        <fieldset class="grupo">
+            <div class="campo">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" style="width: 10em" value="">
+            </div>
+            <div class="campo">
+                <label for="estado">Estado</label>
+                <select name="estado" id="estado">
+                    <option value="">--</option>
+                    <option value="PR">PR</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <div class="campo">
+            <label for="mensagem">Mensagem</label>
+            <textarea rows="6" style="width: 20em" id="mensagem" name="mensagem"></textarea>
+        </div>
+
+        
+        <button type="submit" name="submit">Enviar</button>
+    </fieldset>
+</form>
+
+{% endblock %}
