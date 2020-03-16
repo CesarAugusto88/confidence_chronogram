@@ -27,7 +27,7 @@ def submit_login(request):
         usuario = authenticate(username=username, password=password)
         if usuario is not None:
             login(request, usuario)
-            return redirect('/')
+            return redirect('/chronogram/')
 
         messages.error(request, "Usuário ou senha inválida.")
     
@@ -44,6 +44,7 @@ def list_chronogram(request):
     Exemplo como pegar tarefa do models com usuário específico:
 
     usuario = request.user
+    if usuario...
     tasks = [{ ...}]
 
     task = Task.objects.filter(usuario=usuario,
@@ -53,8 +54,9 @@ def list_chronogram(request):
     """
 
     # usar variáveis do models Task para usar aqui.
-    # Usando listcompression pegando todas as tarefas que está em Task usando
-    #  a função to_dict()...
+    # Usando listcompression pegando todas as tarefas que está em 
+    # Task(models.py) usando a função to_dict()...
+
     tasks = [t.to_dict() for t in Task.objects.all()]
 
 
@@ -93,3 +95,13 @@ def list_chronogram(request):
     }
 
     return render(request, "chronogram.html", context)
+
+
+def home(request):
+	# return HttpResponse('Hello World!')
+	# Usando render
+	return render(request, 'home.html')
+
+
+def contact(request):
+	return render(request, 'contact.html')

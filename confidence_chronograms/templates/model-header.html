@@ -6,8 +6,11 @@
       rel="stylesheet"
       type="text/css"
       href="{% static 'frappe-gantt.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <div class="logout" align="right">
+        <button> 
+            <a href="{% url 'home' %}"> Logout <a>
+        </button>
+    </div>
 
-<div align="right">
-    <a href="/logout"> <h2>Logout</h2> <a>
-</div>
 <h1>Chronogram</h1>

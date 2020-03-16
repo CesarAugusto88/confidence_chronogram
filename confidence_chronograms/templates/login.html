@@ -1,12 +1,51 @@
 <!--Login é uma página única-->
 <!DOCTYPE html>
-<html lang="en">
-<!--load static aqui-->
+<html lang="pt-br">
 {% load static %}
 
 <head>
     <meta charset="UTF-8">
-    <title>Agenda</title>
+    <title>Confidence Chronogram</title>
+    <!--<link rel="icon" href="../static/images/DEVSYS-FAVICON.png">-->
+    <link rel="stylesheet" href="../static/login.css" type="text/css">
+</head>
+<body>
+  <div>
+    <div class="tela">
+      <h1>Login</h1>
+      <form action="submit" method="POST">{% csrf_token %}
+        <div align="left">
+            &emsp;&emsp;
+            <label>Usuário:
+              <input type="text" name="username" placeholder="Name">
+            </label>
+            <label>Senha:
+              <input type="password" name="password" placeholder="Password">
+            </label>
+            <button type="submit">Entrar</button>
+            <button><a href="/">Cancelar</a></button>
+      
+            <!--<img src="../static/images/DEVSYS-FAVICON.png" width="100px" alt="">-->
+        </div>
+      </form>
+
+    {% for message in messages %}
+      <br>
+      <div align="left">
+        &emsp;&emsp; 
+        <strong>Erro: </strong>{{ message }}
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+    
+</body>
+</html>
+
+<!--
+<head>
+    <meta charset="UTF-8">
+    <title>Confidence Chronogram/title>
 </head>
 <body>
     <h1>Login</h1>
@@ -31,3 +70,4 @@
 
 </body>
 </html>
+-->

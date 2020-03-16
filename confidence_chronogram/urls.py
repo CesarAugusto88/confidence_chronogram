@@ -23,8 +23,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('chronogram/', views.list_chronogram),
     #path('', views.index)
-    path('', RedirectView.as_view(url='/chronogram/')),
-    path('login/', views.login_user),
+    # Se encontrar url vazia(normal, local), redireciona para chronogram
+    #path('', RedirectView.as_view(url='/chronogram/')),
+    path('login/', views.login_user, name='login_user'),
     path('login/submit', views.submit_login),
-    path('logout/', views.logout_user)
+    path('logout/', views.logout_user),
+    
+    #--------------redireciona para HOME---------------------------
+    path('', views.home, name='home'),
+    path('', RedirectView.as_view(url='/home/')),
+	path('contato/', views.contact, name='contact'),
+
 ]
+
