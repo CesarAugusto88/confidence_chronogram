@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'confidencechronogram.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'confidence_chronogram.settings')
 
 application = get_wsgi_application()
