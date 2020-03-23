@@ -122,8 +122,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-import django_heroku
+#Comentar django_heroku qndo for rodar localhost
+# import django_heroku
 
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

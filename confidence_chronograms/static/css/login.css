@@ -1,0 +1,20 @@
+body{
+    /*background: url("../images/");*/
+    background-color: rgb(174, 179, 226);
+    background-size: cover;
+    
+}
+.login-form{
+    margin-top: 60px;
+    box-shadow: 0px 0px 10px 1px grey;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    background: white;
+}
+.title{
+    background: #007bbf;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    border-radius: 0px 0px 10px 10px;
+}

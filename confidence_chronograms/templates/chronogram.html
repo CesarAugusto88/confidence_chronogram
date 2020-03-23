@@ -8,12 +8,12 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'frappe-gantt.css' %}">
+      href="{% static 'css/frappe-gantt.css' %}">
       
   </head>
   <body>
     <svg id="chronogram"></svg>
-    <script src="{% static 'frappe-gantt.min.js' %}"></script>
+    <script src="{% static 'js/frappe-gantt.min.js' %}"></script>
   
   <!--Ver se é possível colocar variáveis como colunas de nomes e valores das tarefas/atividades/etapas 
       Em views (tasks) ou aqui.-->
@@ -54,7 +54,7 @@
 
   <!--criar botões para visualizar como dias, semanas, meses:
       gantt.change_view_mode('Week'); -->
-  <script src="{% static 'main.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 
     <button type="button" onclick="days()">Days</button>
     <button type="button" onclick="weeks()">Weeks</button>

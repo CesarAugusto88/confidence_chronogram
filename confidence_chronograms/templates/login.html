@@ -1,73 +1,65 @@
-<!--Login é uma página única-->
 <!DOCTYPE html>
 <html lang="pt-br">
 {% load static %}
 
 <head>
     <meta charset="UTF-8">
-    <title>Confidence Chronogram</title>
-    <!--<link rel="icon" href="../static/images/DEVSYS-FAVICON.png">-->
-    <link rel="stylesheet" href="../static/login.css" type="text/css">
-</head>
-<body>
-  <div>
-    <div class="tela">
-      <h1>Login</h1>
-      <form action="submit" method="POST">{% csrf_token %}
-        <div align="left">
-            &emsp;&emsp;
-            <label>Usuário:
-              <input type="text" name="username" placeholder="Name">
-            </label>
-            <label>Senha:
-              <input type="password" name="password" placeholder="Password">
-            </label>
-            <button type="submit">Entrar</button>
-            <button><a href="/">Cancelar</a></button>
-      
-            <!--<img src="../static/images/DEVSYS-FAVICON.png" width="100px" alt="">-->
-        </div>
-      </form>
-
-    {% for message in messages %}
-      <br>
-      <div align="left">
-        &emsp;&emsp; 
-        <strong>Erro: </strong>{{ message }}
-      </div>
-    {% endfor %}
-    </div>
-  </div>
+    <title>DevSys</title>
     
-</body>
-</html>
-
-<!--
-<head>
-    <meta charset="UTF-8">
-    <title>Confidence Chronogram/title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="submit" method="POST">{% csrf_token %}
-        <div align="left">
-            &emsp;&emsp;
-            <label>Usuário:</label>
-            <input type="text" name="username">
-            <label>Password:</label>
-            <input type="password" name="password">
-            <button type="submit">Entrar</button>
+
+  <section class="container-fluid">
+    <section class="row justify-content-center">
+      <section class="col-12 col-sm-6 col-md-3">
+        <form class="form-cotainer" action="submit" method="POST">{% csrf_token %}
+          <br> <br>
+        <div style="text-align: center">
+          <h4>Login</h4>
         </div>
-    </form>
+          <div class="form-group">
+            <label>Usuário:
+              <input type="text" class="form-control" name="username" size="37" placeholder="Name" aria-describedby="userHelp">
+            </label>
+            <small id="userHelp" class="form-text text-muted">We'll never share your user with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label>Senha:
+              <input type="password" class="form-control" name="password" size="37" placeholder="Password">
+            </label>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+          
+          <button class="btn btn-primary btn-block"><a href="/" style="color: white">Cancelar</a></button>
+          <br>
 
-    {% for message in messages %}
-      <br>
-      <div align="left">
-        &emsp;&emsp; 
-        <strong>Erro: </strong>{{ message }}
-      </div>
-    {% endfor %}
+          <div style="text-align: center">
+            <a href="/">
+              <img src="{% static 'images/' %}" width="100px" alt="logo">
+            </a>
+          </div>
+        </form>
+        {% for message in messages %}
+          <br>
+          <div style="color: red;" align="left">
+            &emsp;&emsp; 
+            <strong>Erro: </strong>{{ message }}
+          </div>
+        {% endfor %}
+      </section>
+    </section>
+  </section>
 
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+ 
 </body>
 </html>
--->
+

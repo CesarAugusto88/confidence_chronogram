@@ -132,7 +132,7 @@ class Chronogram(models.Model):
     
     def __str__(self):
         """Devolve uma representação em string do modelo."""
-        return f"{self.construction}{self.client}{self.owner}"\
+        return f"{self.client}{self.owner}"\
                f"{self.address}{self.total_time}{self.total_price}"
 
     def get_date_chronogram(self):
