@@ -11,8 +11,8 @@ class ChronogramManager(models.Manager):
 		#	name__icontains=query, description__icontains=query)
 		# busca OU
 		return self.get_queryset().filter(
-			models.Q(name__icontains=query) | \
-			models.Q(description__icontains=query))
+			models.Q(construction__icontains=query) | \
+			models.Q(owner__icontains=query))
 
 
 class Funcionario(models.Model):

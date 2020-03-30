@@ -153,13 +153,19 @@ form.pure-form-aligned ul.errorlist li {
 .pure-form .pure-control-group {
     margin-bottom: 1em;
 }
-.pure-button-primary {
+.pure-button {
     background-color: #1f8dd6;
     color: white;
     padding: 0.5em 2em;
     border-radius: 5px;
 }
 
+a.pure-button-primary {
+    background: white;
+    color: #1f8dd6;
+    border-radius: 5px;
+    font-size: 120%;
+}
 .inner {
     padding: 0em 1em;
 }
@@ -175,199 +181,4 @@ ul.breadcrumb li {
 ul.breadcrumb li a {
     display: inline-block;
     padding: 0.3em 0.7em;
-}
-aside {
-    background: #1f8dd6;
-    padding: 0.3em 1em;
-    border-radius: 3px;
-    color: #fff;
-}
-aside p {
-    margin: 0.4em 0;
-}
-table.full {
-    width: 100%;
-}
-.button-xsmall {
-    font-size: 70%;
-}
-
-.button-small {
-    font-size: 85%;
-}
-
-.button-large {
-    font-size: 110%;
-}
-
-.button-xlarge {
-    font-size: 125%;
-}
-.button-success,
-.button-error,
-.button-warning,
-.button-secondary {
-    color: white;
-    border-radius: 4px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
-
-.button-success {
-    background: rgb(28, 184, 65); /* this is a green */
-}
-
-.button-error {
-    background: rgb(202, 60, 60); /* this is a maroon */
-}
-
-.button-warning {
-    background: rgb(223, 117, 20); /* this is an orange */
-}
-
-.button-secondary {
-    background: rgb(66, 184, 221); /* this is a light blue */
-}
-body {
-    min-width: 320px;
-    color: #777;
-    line-height: 1.6;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    color: rgb(75, 75, 75);
-}
-h3 {
-    font-size: 1.25em;
-}
-h4 {
-    font-size: 1.125em;
-}
-
-a {
-    color: #3b8bba; /* block-background-text-normal */
-    text-decoration: none;
-}
-
-dt {
-    font-weight: bold;
-}
-dd {
-    margin: 0 0 10px 0;
-}
-
-aside {
-    background: #1f8dd6; /* same color as selected state on site menu */
-    padding: 0.3em 1em;
-    border-radius: 3px;
-    color: #fff;
-}
-aside a, aside a:visited {
-    color: rgb(169, 226, 255);
-}
-.well {
-    border: 1px solid #ddd;
-    padding: 0em 1em 1em 1em;
-    margin-bottom: 1.5em;
-}
-.fright {
-    float: right;
-}
-.pure-menu li a.tags {
-    display: inline-block;
-}
-.pagination {
-  height: 36px;
-  margin: 18px 0;
-}
-
-.pagination ul {
-  display: inline-block;
-  *display: inline;
-  margin-bottom: 0;
-  margin-left: 0;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
-  *zoom: 1;
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.pagination li {
-  display: inline;
-}
-
-.pagination a {
-  float: left;
-  padding: 0 14px;
-  line-height: 34px;
-  text-decoration: none;
-  border: 1px solid #ddd;
-  border-left-width: 0;
-}
-
-.pagination a:hover {
-  text-decoration: none;
-}
-
-.pagination a:hover,
-.pagination .active a {
-  background-color: #f5f5f5;
-}
-
-.pagination .active a {
-  color: #999999;
-  cursor: default;
-}
-
-.pagination .disabled span,
-.pagination .disabled a,
-.pagination .disabled a:hover {
-  color: #999999;
-  cursor: default;
-  background-color: transparent;
-}
-
-.pagination li:first-child a {
-  border-left-width: 1px;
-  -webkit-border-radius: 3px 0 0 3px;
-     -moz-border-radius: 3px 0 0 3px;
-          border-radius: 3px 0 0 3px;
-}
-
-.pagination li:last-child a {
-  -webkit-border-radius: 0 3px 3px 0;
-     -moz-border-radius: 0 3px 3px 0;
-          border-radius: 0 3px 3px 0;
-}
-
-.pagination-centered {
-  text-align: center;
-}
-
-.pagination-right {
-  text-align: right;
-}
-
-.clear {
-  clear: both;
-  content: " ";
-}
-
-.text-right {
-  text-align: right;
-}
-.text-left {
-  text-align: left;
-}
-.label-success{
-  background-color: #5aba59;
-  color: #fff;
-  margin: 0 0.1em;
-  padding: 0.3em 1em;
-}
-.hidden {
-  display: none;
 }

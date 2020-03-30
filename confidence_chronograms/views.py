@@ -7,7 +7,7 @@ from django.contrib import messages
 # from django.http.response import Http404, JsonResponse
 # from django.contrib.auth.models import User
 import json
-from confidence_chronograms.models import Task
+from confidence_chronograms.models import Task, Cliente
 
 
 #def index(request):
@@ -31,7 +31,7 @@ def submit_login(request):
 
         messages.error(request, "Usuário ou senha inválida.")
     
-    return redirect('/')
+    return redirect('/login/')
 
 @login_required(login_url='/login/')
 def list_chronogram(request):
@@ -40,26 +40,43 @@ def list_chronogram(request):
       atrasar - As atividades ja vão estar no limite.
     Mostrar a porcentagem da conclusão das atividades para o cliente ter uma visão. javascript?
     Mostrar a porcentagem do valor investido conforme o valor total do models Chronogram.
-    
     Exemplo como pegar tarefa do models com usuário específico:
-
     usuario = request.user
     if usuario...
     tasks = [{ ...}]
-
     task = Task.objects.filter(usuario=usuario,
                                task_text=tasks...)
     dados = {'tasks':task}
     return render(request, 'chronogram.html', dados)
     """
-
     # usar variáveis do models Task para usar aqui.
     # Usando listcompression pegando todas as tarefas que está em 
     # Task(models.py) usando a função to_dict()...
 
-    tasks = [t.to_dict() for t in Task.objects.all()]
+    usuario = request.user
+    try:
+        cliente = Cliente.objects.filter(usuario_cli=usuario)
 
+    except Exception:
+        raise Http404()
+   
+    if cliente:
+        tasks = [t.to_dict() for t in Task.objects.all()]
 
+        context = {
+            "tasks": json.dumps(tasks),
+        }
+
+    elif not cliente:
+        messages.info(request, 'Usuário diferente de cliente!')
+        return redirect('/login/')
+
+    else:
+        raise Http404()
+    
+    return render(request, "chronogram.html", context)
+    
+    # antigo:
     # tasks = [
     #     {
     #         "id": "1",
@@ -89,12 +106,6 @@ def list_chronogram(request):
     #         "custom_class": "bar-milestone" # optional
     #     },
     # ]
-
-    context = {
-        "tasks": json.dumps(tasks),
-    }
-
-    return render(request, "chronogram.html", context)
 
 
 def home(request):
