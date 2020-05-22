@@ -136,4 +136,4 @@ dmypy.json
 .pytype/
 
 # Visual Studio Code
-.vscode/
+*.vscode/
