@@ -1,3 +1,0 @@
-#!/home/cesar/confidence_chronogram/cc_env/bin/python
-from requirements_detector.run import run
-run()
