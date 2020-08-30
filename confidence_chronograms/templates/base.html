@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Confidence Chronogram. Cronogramas confiáveis!" />
     <title>Confidence Chronogram</title>
-    <link rel="icon" href="{% static 'images/' %}">
+    <link rel="icon" href="{% static 'images/android-icon-36x36.png' %}">
 
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
@@ -19,7 +19,7 @@
         <a class="pure-menu-heading" href="{% url 'home' %}">CONFIDENCE CHRONOGRAM</a>
         <ul>
             <li class="pure-menu-selected"><a href="{% url 'home' %}">Início</a></li>
-            <li><a href="{% url 'login_user' %}">Cliente<!--Cursos--></a></li>
+            <li><a href="{% url 'login_user' %}">Usuários</a></li>
             <li><a href="{% url 'contact' %}">Contato</a></li>
         </ul>
     </div>
@@ -37,7 +37,6 @@
 	{% block content %}{% endblock %}  <!--serve como place holder para os outros colocar conteudo -->
 	<div class="footer">
         Confidence Chronogram - Um simples concrole de crononogramas para o cliente e a empresa.
-        <!--Simple MOOC - Uma simples plataforma de ensino a distância-->
     </div>
 </div>
 <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script> <!--Final do body-->
