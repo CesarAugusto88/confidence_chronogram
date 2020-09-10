@@ -1,5 +1,11 @@
-.env
-cc_env
+# See the name for you IDE
+.idea
+# If you are using sqlite3
+*.sqlite3
+
+*pyc
+
+# -------------------------
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -22,8 +28,6 @@ parts/
 sdist/
 var/
 wheels/
-pip-wheel-metadata/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -42,14 +46,12 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
-.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
 .hypothesis/
 .pytest_cache/
 
@@ -61,8 +63,6 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
-db.*
-db.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -80,33 +80,16 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# IPython
-profile_default/
-ipython_config.py
-
 # pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
+.python-version
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
-
-# Celery stuff
+# celery beat schedule file
 celerybeat-schedule
-celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
 
-# Environments
+# Environments. .env .venv
 .env
 .venv
 env/
@@ -125,16 +108,28 @@ venv.bak/
 # mkdocs documentation
 /site
 
-# mypy
+# mypy and prospector
 .mypy_cache/
-.dmypy.json
-dmypy.json
+.prospector_cache/
 
-# Pyre type checker
-.pyre/
+# Exclude collected Django static files
+static_collected
 
-# pytype static type analyzer
-.pytype/
+# Exclude machine-specific vs code settings
+.vscode/settings.json
 
-# Visual Studio Code
-*.vscode/
+.venv_devsys
+*pyc
+.env
+.vscode
+# mypy_cache
+
+.mypy_cache
+
+media/
+
+staticfiles/
+tmp/
+*/migrations/*
+passenger_wsgi.py
+code.code-workspace

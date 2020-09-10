@@ -14,12 +14,12 @@ class ClientAdmin(admin.ModelAdmin):
 
 class ChronogramAdmin(admin.ModelAdmin):
     list_display = ('construction', 'client', 'total_time', 'address', 'total_price', 'usuario', 'date_added')
-    list_filter = ('client', 'total_time')
+    list_filter = ('construction', 'client',)
     search_fields = ['client', 'construction']
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('task_text', 'price', 'start_date', 'end_date', 'duration', 'date_added')
+    list_display = ('task_text', 'price', 'start_date', 'end_date', 'date_added')
     list_filter = ('start_date',)
     search_fields = ['task_text', 'start_date']
 

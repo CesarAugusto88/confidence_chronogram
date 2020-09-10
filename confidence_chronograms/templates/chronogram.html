@@ -1,10 +1,8 @@
-{% extends "base.html" %}
+{% extends "base-cliente.html" %}
 
 {% block content %}
 
 {% load static %}
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
 
     <link
       rel="stylesheet"
@@ -16,9 +14,9 @@
     <svg id="chronogram"></svg>
     <script src="{% static 'js/frappe-gantt.min.js' %}"></script>
   
-  <!--Ver se é possível colocar variáveis como colunas de nomes e valores das tarefas/atividades/etapas 
+  <!--Ver se é possível colocar variáveis como colunas de nomes e valores das tarefas/atividades/etapas em tables.
       Em views (tasks) ou aqui.-->
-  
+ 
   <script>
     var tasks = {% autoescape off %} {{ tasks }} {% endautoescape %};
     var options = {
@@ -53,7 +51,7 @@
     
   </script>
 
-  <!--criar botões para visualizar como dias, semanas, meses:
+  <!-- botões para visualizar como dias, semanas, meses:
       gantt.change_view_mode('Week'); -->
   <script src="{% static 'js/main.js' %}"></script>
 

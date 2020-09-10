@@ -32,7 +32,7 @@ class Funcionario(models.Model):
     cidade = models.CharField(blank=True, null=True, max_length=30)
     cep = models.CharField(blank=True, null=True, max_length=9)
     uf = models.CharField(blank=True, null=True, max_length=2)
-    email = models.CharField(blank=True, null=True, max_length=60)
+    email = models.EmailField(blank=True, null=True, max_length=60)
     senha = models.CharField(blank=True, null=True, max_length=16)
     fone1 = models.CharField(verbose_name = 'Telefone 1', max_length=16)
     fone2 = models.CharField(verbose_name = 'Telefone 2', blank=True, null=True, max_length=20)
@@ -75,8 +75,8 @@ class Cliente(models.Model):
     cidade = models.CharField(blank=True, null=True, max_length=30)
     cep = models.CharField(max_length=9)
     uf = models.CharField(max_length=2)
-    email = models.CharField(max_length=60)
-    email2 = models.CharField(blank=True, null=True, max_length=60)
+    email = models.EmailField(max_length=60)
+    email2 = models.EmailField(blank=True, null=True, max_length=60)
     senha = models.CharField(blank=True, null=True, max_length=16)
     fone1 = models.CharField(verbose_name = 'Telefone 1', max_length=16)
     fone2 = models.CharField(verbose_name = 'Telefone 2', blank=True, null=True, max_length=20)
@@ -132,8 +132,8 @@ class Chronogram(models.Model):
     
     def __str__(self):
         """Devolve uma representação em string do modelo."""
-        return f"{self.client}{self.owner}"\
-               f"{self.address}{self.total_time}{self.total_price}"
+        return f"{self.client}{self.construction}"\
+               f"{self.address}{self.total_price}"
 
     def get_date_chronogram(self):
 
@@ -147,10 +147,9 @@ class Task(models.Model):
     chronogram = models.ForeignKey(Chronogram, on_delete=models.PROTECT)
     name = models.CharField(verbose_name = 'Nome', max_length=40)
     task_text = models.TextField(verbose_name = 'Descrição da Tarefa')
-    start_date = models.DateTimeField(verbose_name = 'Inicio')
+    start_date = models.DateField(verbose_name = 'Inicio')
     # Duração já encontra a data final. tipo int com date?
-    duration = models.CharField(verbose_name = 'Duração', max_length=30)
-    end_date = models.DateTimeField(verbose_name = 'Termino')
+    end_date = models.DateField(verbose_name = 'Termino')
     progress = models.CharField(verbose_name= 'Progresso %', max_length=3)
     dependencies = models.CharField(verbose_name='Dependências', max_length=10)
     price = models.DecimalField(verbose_name = 'Valor', max_digits=10, decimal_places=4)

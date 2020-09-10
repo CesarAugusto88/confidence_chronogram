@@ -1,0 +1,67 @@
+{% extends "base-funcionario.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Bem Vindo(a)!</h2>  
+    <!-- <a href="funcionario/" style="text-decoration:none">
+      <button type="button">Novo funcionario</button>
+    </a> -->
+
+   <!-- IF se funcionário existir 'usuario_fun' mostra o conteúdo -->
+    <ul style="font-size: 20px;">
+        {% for funcionario in funcionario %}
+          {% if funcionario.usuario_fun %}
+          <div class="content-ribbon">
+          <fieldset>
+            <legend>Dados do Funcionário</legend>
+            <p>
+              <label>Nome:
+              {{ funcionario.nome }}
+              </label>
+            </p>
+            <p>
+                <label>Telefone:
+                {{ funcionario.fone1 }}            
+                </label>
+            </p>
+          </fieldset>
+
+          <fieldset>
+              <legend>Endereço</legend>
+              <p>
+                  <label>Rua:
+                  {{ funcionario.endereco }}
+                  </label>
+              </p>
+              <p>
+                <label>Cidade:
+                {{ funcionario.cidade }}
+                </label>
+              </p>
+              <p>
+                  <label>Cep:
+                  {{ funcionario.cep }}
+                  </label>
+              </p>
+              <p>
+                <label>Estado:
+                {{ funcionario.uf }}
+                </label>
+              </p>
+ 
+          </fieldset>   
+          <br>
+          
+          <a href="func/?id={{ funcionario.id }}" style="text-decoration:none">
+            <button class="btn btn-info btn-sm" type="button">Editar
+              <span class="icono-rename" aria-hidden="true"></span>
+            </button>
+          </a>  
+          
+          </div>
+          {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock%}
