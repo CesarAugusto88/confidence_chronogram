@@ -1,1 +1,1 @@
-web: gunicorn confidence_chronogram.wsgi --log-file -
+web: gunicorn confidencechronogram.wsgi --log-file -
