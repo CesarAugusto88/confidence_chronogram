@@ -31,14 +31,13 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'chronogram_list' %}">
               <button type="button" class="btn btn-sm" style="color: mintcream;">
                 Cronogramas
-                <span class="icono-list" aria-hidden="true">(current)</span>  
+                <span class="icono-file" aria-hidden="true">(current)</span>  
               </button>
             </a>
           </li>
@@ -46,7 +45,7 @@
             <a class="nav-link" href="#">
               <button type="button" class="btn btn-sm" style="color: mintcream;">
               Tarefas
-              <span class="icono-file" aria-hidden="true"></span>
+              <span class="icono-list" aria-hidden="true"></span>
               </button>
             </a>
           </li>
@@ -61,7 +60,7 @@
                   </div>
                 </div>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
 
             <a class="nav-link" href="#">
               <button class="btn btn-sm" type="button" style="color: mintcream;">
@@ -77,7 +76,7 @@
                 <span class="icono-list" aria-hidden="true"></span>  
               </button>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout_user' %}">
                 <button type="button" class="btn btn-sm" style="color: mintcream;">

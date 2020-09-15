@@ -121,7 +121,7 @@ class Chronogram(models.Model):
     total_time = models.CharField(verbose_name = 'Tempo total', max_length=30)
     total_price = models.DecimalField(verbose_name = 'Valor total', max_digits=10, decimal_places=4)
     date_added = models.DateTimeField(verbose_name = 'Data de criação', auto_now_add=True)
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+
 
     # classe Meta serve para modificar nomes para plural
     class Meta:

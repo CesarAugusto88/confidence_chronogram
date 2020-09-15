@@ -1,0 +1,56 @@
+{% extends 'base-cliente.html' %}
+
+{% block content %}
+<div class="content-ribbon">
+  {% block content_header %}
+    <h2>Chamados</h2>
+    <a class="navbar-brand pure-button pure-button-primary btn-sm" 
+    href="{% url 'funcionario'  %}">
+        <span class="icono-caretLeftSquare" aria-hidden="true"></span>
+        Voltar
+    </a>   
+    <a class="navbar-brand pure-button pure-button-primary btn-sm" 
+    href="{% url 'new_chronogram' %}">
+        <span class="icono-plus" aria-hidden="true"></span>
+        Novo Cronograma
+    </a>   
+    
+  {% endblock %}
+  <div class="pure-u-1">
+    <table class="pure-table pure-table-bordered">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Assunto</th>
+          <th>Descrição</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for cronograma in cronogramas %}
+          <tr>
+            <td>{{ cronograma.titulo }}</td>
+            <td>{{ cronograma.assunto }}</td>
+            <td>{{ cronograma.descricao }}</td>
+
+            {% comment %}
+            <!-- retirado exclusão ...-->
+            <td>
+
+              <form method="post" action="{% url 'delete_chronogram' chronogram.pk %}">
+                {% csrf_token %}
+                
+                <button type="submit" class="pure-button pure-button-disabled" onclick="return confirm('Tem certeza que deseja deletar esse registro?');">Delete</button>
+              
+              </form>
+            
+            </td>
+            {% endcomment %}
+            
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

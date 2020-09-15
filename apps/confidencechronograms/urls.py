@@ -11,6 +11,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('', RedirectView.as_view(url='/home/')),
     path('contato/', views.contact, name='contact'),
+    #Lista (tarefas) do cronograma
     path('chronogram/', views.list_chronogram, name='list_chronogram'),
     #path('', views.index)
     # Se encontrar url vazia(normal, local), redireciona para chronogram
@@ -37,6 +38,11 @@ urlpatterns = [
     #    "confidencechronogram/func/delete/<int:id_funcionario>/",
     #    views.delete_funcionario, name="del_funcionario"
     #),
+    ###############################
+    # Criar Cronograma, Listar cronogramas...
+    path("confidencechronogram/chronogram/", views.chronogram_list, name="chronogram_list"),
+    path("confidencechronogram/chronogram/newchronogram/", views.new_chronogram, name="new_chronogram"),
+    # path("confidencechronogram/cronogram/<int:pk>/", views.delete_cronogram, name="delete_cronogram"),
 
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 

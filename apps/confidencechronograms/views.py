@@ -7,6 +7,7 @@ from django.http.response import Http404, JsonResponse
 from django.contrib.auth.models import User
 import json
 from apps.confidencechronograms.models import Task, Cliente, Funcionario, Chronogram
+from apps.confidencechronograms.forms import TaskForm, ChronogramForm
 
 
 #def index(request):
@@ -43,7 +44,7 @@ def confidencechronogram(request):
         return redirect("/confidencechronogram/funcionario")
     else:
         #return redirect("/confidencechronogram/cliente")
-        return redirect("/chronogram")
+        return redirect("/confidencechronogram/cliente")
 
 # lista as tarefas do chronograma para o cliente
 @login_required(login_url='/login/')
@@ -319,4 +320,61 @@ def json_lista_funcionario(request, id_usuario_fun):
     )
     # safe=False porque nao é dicionário.
     return JsonResponse(list(funcionario), safe=False)
+
+#########################################
+# Criar Cronograma, Listar Cronogramas, Deletar-não.
+@login_required(login_url="/login/")
+def chronogram_list(request):
+    usuario = request.user
+    dados = {}
+    try:
+        funcionario = Funcionario.objects.get(usuario_fun=usuario)
+        
+    except Exception:
+        raise Http404()
+
+    if funcionario:
+        cronogramas = Chronogram.objects.all()
+        dados = {"cronogramas": cronogramas}
+    else:
+        raise Http404()
+
+    return render(request, "chronogram_list.html", dados)
+
+
+@login_required(login_url="/login/")
+def new_chronogram(request):
+    """ Cria formulário do cronograma e envia objeto cliente.
+    """
+
+    #print(usuario_cli)
+    if request.method == "POST":
+        form = ChronogramForm(request.POST)
+        if form.is_valid():
+            titulo = form.cleaned_data['titulo']
+            assunto = form.cleaned_data['assunto']
+            descricao = form.cleaned_data['descricao']
+            arquivo = form.cleaned_data['arquivo']
+            funcionario = form.cleaned_data['funcionario']
+            cliente = form.cleaned_data['cliente']
+            novo = Chronogram(
+                titulo=titulo, assunto=assunto, descricao=descricao,
+                arquivo=arquivo, funcionario=funcionario, cliente=cliente 
+            )
+            novo.save()
+            #form.save()
+            return redirect("funcionario")
+    else:
+        form = ChamadoForm()
+    return render(request, "criar_cronograma.html", {"form": form})
+
+
+@login_required(login_url="/login/")
+def delete_chronogram(request, pk):
+    if request.method == "POST":
+        chronogram = Chronogram.objects.get(pk=pk)
+        chronogram.delete()
+    return redirect("funcionario")
+
+
 

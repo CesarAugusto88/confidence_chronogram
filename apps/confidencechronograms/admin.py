@@ -13,7 +13,7 @@ class ClientAdmin(admin.ModelAdmin):
 
 
 class ChronogramAdmin(admin.ModelAdmin):
-    list_display = ('construction', 'client', 'total_time', 'address', 'total_price', 'usuario', 'date_added')
+    list_display = ('construction', 'client', 'total_time', 'address', 'total_price', 'date_added')
     list_filter = ('construction', 'client',)
     search_fields = ['client', 'construction']
 
