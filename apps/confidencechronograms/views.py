@@ -69,14 +69,14 @@ def list_chronogram(request):
         raise Http404()
    
     if cliente:
-        print(cronograma.id)
+        #print(cronograma.id)
         #c = Chronogram.objects.first()
         #c = request.user.chronogram_set.get()
 
         tasks = [t.to_dict() for t in Task.objects.filter(chronogram=cronograma.id)]
 
         context = {
-            "tasks": json.dumps(tasks), "cliente": cliente
+            "tasks": json.dumps(tasks), "cliente": cliente, 'cronograma': cronograma
         }
 
     elif not cliente:

@@ -9,11 +9,12 @@
       type="text/css"
       href="{% static 'css/frappe-gantt.css' %}">
   
-  <div class="content" style="margin-top: 4%;">
-    <h4>Confidence Chronogram</h4><!--Título na aba-->
+    <h3>Cliente: {{ cliente.nome }}</h3>
+    <h3>Construção: {{ cronograma.construction }}</h3>
+  
     <svg id="chronogram"></svg>
     <script src="{% static 'js/frappe-gantt.min.js' %}"></script>
-  
+
   <!--Ver se é possível colocar variáveis como colunas de nomes e valores das tarefas/atividades/etapas em tables.
       Em views (tasks) ou aqui.-->
  
@@ -58,8 +59,8 @@
   <button type="button" onclick="days()">Days</button>
   <button type="button" onclick="weeks()">Weeks</button>
   <button type="button" onclick="months()">Months</button>
-  <button type="button" onclick="years()">Years</button>  
+  <button type="button" onclick="years()">Years</button>
 
-  </div>
+
 
 {% endblock %}
