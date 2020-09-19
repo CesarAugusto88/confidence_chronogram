@@ -344,37 +344,81 @@ def chronogram_list(request):
 
 @login_required(login_url="/login/")
 def new_chronogram(request):
-    """ Cria formulário do cronograma e envia objeto cliente.
-    """
-
-    #print(usuario_cli)
+    """ Cria formulário do cronograma e envia objeto cliente."""
     if request.method == "POST":
         form = ChronogramForm(request.POST)
         if form.is_valid():
-            titulo = form.cleaned_data['titulo']
-            assunto = form.cleaned_data['assunto']
-            descricao = form.cleaned_data['descricao']
-            arquivo = form.cleaned_data['arquivo']
-            funcionario = form.cleaned_data['funcionario']
-            cliente = form.cleaned_data['cliente']
-            novo = Chronogram(
-                titulo=titulo, assunto=assunto, descricao=descricao,
-                arquivo=arquivo, funcionario=funcionario, cliente=cliente 
-            )
+            novo = Chronogram(**form.cleaned_data)
             novo.save()
-            #form.save()
+
             return redirect("funcionario")
     else:
-        form = ChamadoForm()
+        form = ChronogramForm()
     return render(request, "criar_cronograma.html", {"form": form})
 
+#Update Chronogram
+@login_required(login_url="/login/")
+def update_chronogram(request, id):
+    """ Atualiza Cronograma."""
+    chronogram = Chronogram.objects.get(id=id)
+    form = ChronogramForm(request.POST or None, instance=chronogram)
+    if form.is_valid():
+        novo.save()
+        return redirect("chronogram_list")
+    return render(request, "chronogram_update.html", {"form": form, 'chronogram': chronogram})
 
 @login_required(login_url="/login/")
 def delete_chronogram(request, pk):
     if request.method == "POST":
         chronogram = Chronogram.objects.get(pk=pk)
         chronogram.delete()
-    return redirect("funcionario")
+    return redirect("chronogram_list")
 
+# Criar Tarefas, Listar tarefas, Deletar-.---------------------
+@login_required(login_url="/login/")
+def task_list(request):
+    usuario = request.user
+    dados = {}
+    try:
+        funcionario = Funcionario.objects.get(usuario_fun=usuario)
+    except Exception:
+        raise Http404()
+    if funcionario:
+        tasks = Task.objects.all()
+        dados = {"tasks": tasks}
+    else:
+        raise Http404()
+    return render(request, "task_list.html", dados)
+
+@login_required(login_url="/login/")
+def new_task(request):
+    """ Cria formulário de tarefa."""
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            novo = Task(**form.cleaned_data)
+            novo.save()
+            return redirect("task_list")
+    else:
+        form = TaskForm()
+    return render(request, "criar_tarefa.html", {"form": form})
+
+#Update task
+@login_required(login_url="/login/")
+def update_task(request, id):
+    """ Atualiza tarefa."""
+    task = Task.objects.get(id=id)
+    form = TaskForm(request.POST or None, instance=task)
+    if form.is_valid():
+        novo.save()
+        return redirect("task_list")
+    return render(request, "task_update.html", {"form": form, 'task': task})
+
+@login_required(login_url="/login/")
+def delete_task(request, pk):
+    if request.method == "POST":
+        task = Task.objects.get(pk=pk)
+        task.delete()
+    return redirect("task_list")
 
 

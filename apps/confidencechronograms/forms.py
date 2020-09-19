@@ -20,14 +20,16 @@ class FuncionarioForm(forms.ModelForm):
 
 class TaskForm(forms.ModelForm):
     class Meta:
-        model = Funcionario
+        model = Task
         fields = (
-            
+            'ident', 'chronogram', 'name', 'task_text', 'start_date',
+            'end_date', 'progress', 'dependencies', 'price'
             )
 
 class ChronogramForm(forms.ModelForm):
     class Meta:
-        model = Funcionario
-        fields = (
-            
+        model = Chronogram
+        fields = ( 
+            'construction', 'client', 'owner', 'address',
+            'total_time', 'total_price'
             )

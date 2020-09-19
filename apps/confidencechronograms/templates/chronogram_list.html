@@ -1,14 +1,9 @@
-{% extends 'base-cliente.html' %}
+{% extends 'base-funcionario.html' %}
 
 {% block content %}
-<div class="content-ribbon">
+<div class="content-ribbon" style="padding-top: 1rem;">
   {% block content_header %}
-    <h2>Chamados</h2>
-    <a class="navbar-brand pure-button pure-button-primary btn-sm" 
-    href="{% url 'funcionario'  %}">
-        <span class="icono-caretLeftSquare" aria-hidden="true"></span>
-        Voltar
-    </a>   
+    <h2>Cronogramas</h2>
     <a class="navbar-brand pure-button pure-button-primary btn-sm" 
     href="{% url 'new_chronogram' %}">
         <span class="icono-plus" aria-hidden="true"></span>
@@ -20,33 +15,27 @@
     <table class="pure-table pure-table-bordered">
       <thead>
         <tr>
-          <th>Título</th>
-          <th>Assunto</th>
-          <th>Descrição</th>
-
+          <!--'construction', 'client', 'owner', 'address',
+            'total_time', 'total_price'-->
+          <th>Construção</th>
+          <th>Cliente</th>
+          <th>Endereço</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
         {% for cronograma in cronogramas %}
           <tr>
-            <td>{{ cronograma.titulo }}</td>
-            <td>{{ cronograma.assunto }}</td>
-            <td>{{ cronograma.descricao }}</td>
-
-            {% comment %}
-            <!-- retirado exclusão ...-->
+            <td>{{ cronograma.construction }}</td>
+            <td>{{ cronograma.client }}</td>
+            <td>{{ cronograma.address }}</td>
+            <!-- retirar exclusão ...-->
             <td>
-
-              <form method="post" action="{% url 'delete_chronogram' chronogram.pk %}">
+              <form method="post" action="{% url 'delete_chronogram' cronograma.pk %}">
                 {% csrf_token %}
-                
                 <button type="submit" class="pure-button pure-button-disabled" onclick="return confirm('Tem certeza que deseja deletar esse registro?');">Delete</button>
-              
               </form>
-            
             </td>
-            {% endcomment %}
-            
           </tr>
         {% endfor %}
       </tbody>

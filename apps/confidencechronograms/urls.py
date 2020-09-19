@@ -38,12 +38,18 @@ urlpatterns = [
     #    "confidencechronogram/func/delete/<int:id_funcionario>/",
     #    views.delete_funcionario, name="del_funcionario"
     #),
-    ###############################
-    # Criar Cronograma, Listar cronogramas...
+    ##################################################################################################
+    # Cronograma
     path("confidencechronogram/chronogram/", views.chronogram_list, name="chronogram_list"),
     path("confidencechronogram/chronogram/newchronogram/", views.new_chronogram, name="new_chronogram"),
-    # path("confidencechronogram/cronogram/<int:pk>/", views.delete_cronogram, name="delete_cronogram"),
-
+    path("confidencechronogram/chronogram/update/<int:id>/", views.update_chronogram, name="update_chronogram"),
+    path("confidencechronogram/chronogram/delete/<int:pk>/", views.delete_chronogram, name="delete_chronogram"),
+    # Tarefa
+    path("confidencechronogram/task/", views.task_list, name="task_list"),
+    path("confidencechronogram/task/newtask/", views.new_task, name="new_task"),
+    path("confidencechronogram/task/update/<int:id>/", views.update_task, name="update_task"),
+    path("confidencechronogram/task/delete/<int:id>/", views.delete_task, name="delete_task"),
+    # Para aparecer arquivos do diretório media quando DEBUG=False
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 

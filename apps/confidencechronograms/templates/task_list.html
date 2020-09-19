@@ -1,0 +1,64 @@
+{% extends 'base-funcionario.html' %}
+
+{% block content %}
+<div class="content-ribbon" style="padding-top: 1rem;">
+  {% block content_header %}
+    <h2>Tarefas</h2>
+    <a class="navbar-brand pure-button pure-button-primary btn-sm" 
+    href="{% url 'new_task' %}">
+        <span class="icono-plus" aria-hidden="true"></span>
+        Nova Tarefa
+    </a>   
+    
+  {% endblock %}
+  <div class="pure-u-1">
+    <table class="pure-table pure-table-bordered">
+      <thead>
+        <tr>
+          <!--'ident', 'chronogram', 'name', 'task_text', 'start_date',
+            'end_date', 'progress', 'dependencies', 'price'-->
+          <th>Ident.</th>
+          <th>Cronograma</th>
+          <th>Tarefa</th>
+          <th>Início</th>
+          <th>Fim</th>
+          <th>Progresso</th>
+          <th>Depêndencia</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td>{{ task.ident }}</td>
+            <td>{{ task.chronogram.client }}</td>
+            <td>{{ task.name }}</td>
+            <td>{{ task.start_date }}</td>
+            <td>{{ task.end_date }}</td>
+            <td>{{ task.progress }}</td>
+            <td>{{ task.dependencies }}</td>
+            <td><a href="{% url 'update_task' task.id %}" style="text-decoration:none">
+                <button class="btn btn-info btn-sm" type="button">Update
+                  <span class="icono-rename" aria-hidden="true"></span>
+                </button>
+              </a> </td>
+            
+            <!-- retirar exclusão ...-->
+            <td>
+
+              <form method="post" action="{% url 'delete_task' task.pk %}">
+                {% csrf_token %}
+                
+                <button type="submit" class="pure-button pure-button-disabled" onclick="return confirm('Tem certeza que deseja deletar esse registro?');">Delete</button>
+              
+              </form>
+            </td>
+            
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
