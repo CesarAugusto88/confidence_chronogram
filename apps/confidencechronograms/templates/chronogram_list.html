@@ -20,6 +20,7 @@
           <th>Construção</th>
           <th>Cliente</th>
           <th>Endereço</th>
+          <th>Update</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -29,6 +30,11 @@
             <td>{{ cronograma.construction }}</td>
             <td>{{ cronograma.client }}</td>
             <td>{{ cronograma.address }}</td>
+            <td><a href="{% url 'update_chronogram' cronograma.id %}" style="text-decoration:none">
+              <button class="btn btn-info btn-sm" type="button">Update
+                <span class="icono-rename" aria-hidden="true"></span>
+              </button>
+            </a> </td>
             <!-- retirar exclusão ...-->
             <td>
               <form method="post" action="{% url 'delete_chronogram' cronograma.pk %}">
