@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 
 class ChronogramManager(models.Manager):
@@ -132,8 +134,8 @@ class Chronogram(models.Model):
     
     def __str__(self):
         """Devolve uma representação em string do modelo."""
-        return f"{self.client}{self.construction}"\
-               f"{self.address}{self.total_price}"
+        return f"Cliente:{self.client}, Construção:{self.construction} " \
+               f"Endereço:{self.address}, Valor:{self.total_price}"
 
     def get_date_chronogram(self):
 
@@ -202,3 +204,18 @@ class Task(models.Model):
 #         },
 
 # Tabelas: Clientes para acessar os cronogramas e as tarefas, assim como os funcionários. OK
+    #Emails
+    def save(self, *args, **kwargs):
+        super(Task, self).save(*args, **kwargs)
+        data = {'tarefa': self.name}
+        plain_text = render_to_string('emails/cliente.txt', data)
+        html_email = render_to_string('emails/cliente.html', data)
+        send_mail(
+            'Tarefa cadastrada...',
+            plain_text,
+            'cesar@devsys.com.br',
+            ['cesar@devsys.com.br'],
+            html_message=html_email,
+            fail_silently=True,
+        )
+        print(plain_text)

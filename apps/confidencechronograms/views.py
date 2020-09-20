@@ -12,6 +12,13 @@ from apps.confidencechronograms.forms import TaskForm, ChronogramForm
 
 #def index(request):
 #    return redirect('/chronogram/')
+def home(request):
+    # return HttpResponse('Hello World!')
+    # Usando render
+    return render(request, 'home.html')
+
+def contact(request):
+    return render(request, 'contact.html')
 
 def login_user(request):
     return render(request, 'login.html')
@@ -41,10 +48,10 @@ def confidencechronogram(request):
     funcionario = Funcionario.objects.filter(usuario_fun=usuario)
 
     if funcionario:
-        return redirect("/confidencechronogram/funcionario")
+        return redirect("funcionario")
     else:
         #return redirect("/confidencechronogram/cliente")
-        return redirect("/confidencechronogram/cliente")
+        return redirect("cliente")
 
 # lista as tarefas do chronograma para o cliente
 @login_required(login_url='/login/')
@@ -119,20 +126,7 @@ def list_chronogram(request):
     #         "custom_class": "bar-milestone" # optional
     #     },
     # ]
-
-
-def home(request):
-    # return HttpResponse('Hello World!')
-    # Usando render
-    return render(request, 'home.html')
-
-
-def contact(request):
-    return render(request, 'contact.html')
-
-
-###############################################
-
+#
 # -------Cliente--------------------------
 # Cliente vai ver seus dados e pode editar
 
@@ -363,7 +357,7 @@ def update_chronogram(request, id):
     chronogram = Chronogram.objects.get(id=id)
     form = ChronogramForm(request.POST or None, instance=chronogram)
     if form.is_valid():
-        novo.save()
+        form.save()
         return redirect("chronogram_list")
     return render(request, "chronogram_update.html", {"form": form, 'chronogram': chronogram})
 
@@ -410,7 +404,7 @@ def update_task(request, id):
     task = Task.objects.get(id=id)
     form = TaskForm(request.POST or None, instance=task)
     if form.is_valid():
-        novo.save()
+        form.save()
         return redirect("task_list")
     return render(request, "task_update.html", {"form": form, 'task': task})
 

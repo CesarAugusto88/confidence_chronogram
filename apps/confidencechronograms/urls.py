@@ -17,7 +17,7 @@ urlpatterns = [
     # Se encontrar url vazia(normal, local), redireciona para chronogram
     #path('', RedirectView.as_view(url='/chronogram/')),
     path('login/', views.login_user, name='login_user'),
-    path('login/submit', views.submit_login),
+    path('login/submit', views.submit_login, name='submit_login'),
     path('logout/', views.logout_user, name='logout_user'),
 
     path("confidencechronogram/", views.confidencechronogram, name="confidencechronogram"),

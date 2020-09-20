@@ -144,9 +144,9 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/confidencechronogram/'
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-#Comentar django_heroku qndo for rodar localhost
-# import django_heroku
-
-# django_heroku.settings(locals())
+# Configurations e-mail
+EMAIL_HOST = 'http://mail.devsys.com.br:2079'
+EMAIL_PORT = 2079
+EMAIL_HOST_USER = 'cesar@devsys.com.br'
+EMAIL_HOST_PASSWORD = 'Cesar_DevSys'
+EMAIL_USE_TLS = False
