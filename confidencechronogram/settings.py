@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['devsys.com.br', 'www.devsys.com.br', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['confidence.devsys.com.br', 'www.confidence.devsys.com.br', '127.0.0.1', 'localhost']
 
 
 
