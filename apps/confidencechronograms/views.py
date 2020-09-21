@@ -362,9 +362,9 @@ def update_chronogram(request, id):
     return render(request, "chronogram_update.html", {"form": form, 'chronogram': chronogram})
 
 @login_required(login_url="/login/")
-def delete_chronogram(request, pk):
+def delete_chronogram(request, id):
     if request.method == "POST":
-        chronogram = Chronogram.objects.get(pk=pk)
+        chronogram = Chronogram.objects.get(id=id)
         chronogram.delete()
     return redirect("chronogram_list")
 
@@ -409,9 +409,9 @@ def update_task(request, id):
     return render(request, "task_update.html", {"form": form, 'task': task})
 
 @login_required(login_url="/login/")
-def delete_task(request, pk):
+def delete_task(request, id):
     if request.method == "POST":
-        task = Task.objects.get(pk=pk)
+        task = Task.objects.get(id=id)
         task.delete()
     return redirect("task_list")
 

@@ -37,9 +37,9 @@
             </a> </td>
             <!-- retirar exclusão ...-->
             <td>
-              <form method="post" action="{% url 'delete_chronogram' cronograma.pk %}">
+              <form method="post" action="{% url 'delete_chronogram' cronograma.id %}">
                 {% csrf_token %}
-                <button type="submit" class="pure-button pure-button-disabled" onclick="return confirm('Tem certeza que deseja deletar esse registro?');">Delete</button>
+                <button type="submit" class="pure-button pure-button-disabled" onclick="return confirm('Tem certeza que deseja deletar esse registro? Verifique se todas tarefas estão removidas.');">Delete</button>
               </form>
             </td>
           </tr>

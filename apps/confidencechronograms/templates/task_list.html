@@ -47,10 +47,10 @@
             <!-- retirar exclusão ...-->
             <td>
 
-              <form method="post" action="{% url 'delete_task' task.pk %}">
+              <form method="post" action="{% url 'delete_task' task.id %}">
                 {% csrf_token %}
-                
-                <button type="submit" class="pure-button pure-button-disabled" onclick="return confirm('Tem certeza que deseja deletar esse registro?');">Delete</button>
+                <!-- onclick deseja realmente deletar...-->
+                <button type="submit" class="navbar-brand pure-button" onclick="return confirm('Tem certeza que deseja deletar esse registro?');">Delete</button>
               
               </form>
             </td>

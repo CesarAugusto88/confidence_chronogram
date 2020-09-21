@@ -43,7 +43,7 @@ urlpatterns = [
     path("confidencechronogram/chronogram/", views.chronogram_list, name="chronogram_list"),
     path("confidencechronogram/chronogram/newchronogram/", views.new_chronogram, name="new_chronogram"),
     path("confidencechronogram/chronogram/update/<int:id>/", views.update_chronogram, name="update_chronogram"),
-    path("confidencechronogram/chronogram/delete/<int:pk>/", views.delete_chronogram, name="delete_chronogram"),
+    path("confidencechronogram/chronogram/delete/<int:id>/", views.delete_chronogram, name="delete_chronogram"),
     # Tarefa
     path("confidencechronogram/task/", views.task_list, name="task_list"),
     path("confidencechronogram/task/newtask/", views.new_task, name="new_task"),

@@ -16,11 +16,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['confidencechronogram.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['devsys.com.br', 'www.devsys.com.br', '127.0.0.1', 'localhost']
 
 
-# Application definition
 
+# Apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -144,9 +144,9 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/confidencechronogram/'
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-# Configurations e-mail
-EMAIL_HOST = 'http://mail.devsys.com.br:2079'
+#Configurations e-mail
+EMAIL_HOST = 'http://mail.devsys.com.br'
 EMAIL_PORT = 2079
 EMAIL_HOST_USER = 'cesar@devsys.com.br'
 EMAIL_HOST_PASSWORD = 'Cesar_DevSys'
-EMAIL_USE_TLS = False
+EMAIL_USE_TLS = True

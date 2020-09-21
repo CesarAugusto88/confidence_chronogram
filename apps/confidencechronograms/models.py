@@ -163,15 +163,7 @@ class Task(models.Model):
         #ordenar
         ordering = ['date_added']
     
-
-    def __str__(self):
-        """Devolve uma representação em string do modelo."""        
-        if len(self.task_text) >= 50:
-            return f"{self.task_text[:50]}..."
-        
-        return f"{self.task_text}"
- 
-    
+    # Dicionário das tarefas
     def to_dict(self):
         """ Cria dicionário das tarefas
         
@@ -216,6 +208,13 @@ class Task(models.Model):
             'cesar@devsys.com.br',
             ['cesar@devsys.com.br'],
             html_message=html_email,
-            fail_silently=True,
+            fail_silently=True, #False erro
         )
         print(plain_text)
+
+    def __str__(self):
+        """Devolve uma representação em string do modelo."""        
+        if len(self.task_text) >= 50:
+            return f"{self.task_text[:50]}..."
+        
+        return f"{self.name} {self.task_text}"
