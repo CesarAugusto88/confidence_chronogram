@@ -206,9 +206,9 @@ class Task(models.Model):
             'Tarefa cadastrada...',
             plain_text,
             'cesar@devsys.com.br',
-            ['cesar@devsys.com.br'],
+            ['cesar@devsys.com.br', 'cesarcosta.augustos@gmail.com'],
             html_message=html_email,
-            fail_silently=True, #False erro
+            fail_silently=True, #False erro. Então, basicamente, se for verdade, você não obterá nenhum log ou erro de um e-mail enviado com falha
         )
         print(plain_text)
 
