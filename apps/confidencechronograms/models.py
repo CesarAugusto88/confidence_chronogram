@@ -171,9 +171,7 @@ class Task(models.Model):
             dicionário -- com variáveis de Task
         """
 
-        # pegou pk que é usado como uma chave estrangeira de id da tarefa?
-        # Usar identificador qualquer para usar como dependências de outras
-        # tarefas.
+        
         return {
             "id": self.ident,
             "name": self.name,
@@ -194,9 +192,7 @@ class Task(models.Model):
 #             "dependencies": "2",
 #             "custom_class": "bar-milestone" # optional
 #         },
-
-# Tabelas: Clientes para acessar os cronogramas e as tarefas, assim como os funcionários. OK
-    #Emails
+#
     def save(self, *args, **kwargs):
         super(Task, self).save(*args, **kwargs)
         data = {'tarefa': self.name}
@@ -218,3 +214,56 @@ class Task(models.Model):
             return f"{self.task_text[:50]}..."
         
         return f"{self.name} {self.task_text}"
+    
+# Comentario feito por um cliente
+class Comentario(models.Model):
+    """Tabela de comentário com referencia de cliente e funcionário."""
+    dt_entrada = models.DateTimeField("Data de Entrada", auto_now=True)
+    nome_cliente = models.CharField("Nome do cliente", max_length=30)
+    assunto = models.CharField("Assunto", max_length=50)
+    descricao = models.TextField(verbose_name = 'Descrição')
+    arquivo = models.FileField(
+        upload_to="chamado/arquivos/", null=True, blank=True
+        )
+    # referência do cliente para o funcionário dos chamados
+    funcionario = models.ForeignKey(
+        "Funcionario", on_delete=models.PROTECT, related_name='funcionario'
+        )
+    cliente = models.ForeignKey(
+        "Cliente", on_delete=models.PROTECT, related_name='cliente'
+        )
+
+    #Emails
+    def save(self, *args, **kwargs):
+        super(Comentario, self).save(*args, **kwargs)
+        data = {'cliente': self.nome_cliente}
+        plain_text = render_to_string('emails/cliente_comentario.txt', data)
+        html_email = render_to_string('emails/cliente_comentario.html', data)
+        send_mail(
+            'Chamado enviado.',
+            plain_text,
+            'cesar@devsys.com.br',
+            ['cesar@devsys.com.br'],
+            html_message=html_email,
+            fail_silently=True, #False erro
+        )
+        print(plain_text)
+    
+    # classe Meta serve p modificar nomes e plural
+    class Meta:
+        verbose_name = "Comentário"
+        verbose_name_plural = "Comentários"
+        # ordenar
+        ordering = ["dt_entrada"]
+    
+    #delete
+    def delete(self, *args, **kwargs):
+        self.arquivo.delete()
+        super().delete(*args, **kwargs)
+
+    def get_dt_entrada_ch(self):
+        """Mostra data de entrada formatada."""
+        return self.dt_entrada.strftime("%d/%m/%Y %H h : %M min")
+
+    def __str__(self):
+        return f"{self.cliente.nome} {self.funcionario.nome}"

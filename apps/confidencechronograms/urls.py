@@ -49,6 +49,17 @@ urlpatterns = [
     path("confidencechronogram/task/newtask/", views.new_task, name="new_task"),
     path("confidencechronogram/task/update/<int:id>/", views.update_task, name="update_task"),
     path("confidencechronogram/task/delete/<int:id>/", views.delete_task, name="delete_task"),
+    # ------------Comentário-Cliente-------------------------------------------
+    path("confidencechronogram/uploadcomentario/", views.uploadcomentario, name="uploadcomentario"),
+    path("confidencechronogram/comentarios/", views.comentario_list, name="comentario_list"),
+    path("confidencechronogram/comentarios/criarcomentarios/", views.criar_comentario, name="criar_comentario"),
+    path("confidencechronogram/comentarios/update/<int:id>/", views.update_comentario, name="update_comentario"),
+    path("confidencechronogram/comentarios/delete/<int:id>/", views.delete_comentario, name="delete_comentario"),
+    #visualizar a lista de comentarios pelo funcionario também
+    path("confidencechronogram/comentarios/funcionario", views.comentario_list_fun, name="comentario_list_fun"),
+    #Valores de tarefas
+    path("confidencechronogram/task/price", views.price_task, name="price_task"),
+
     # Para aparecer arquivos do diretório media quando DEBUG=False
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 

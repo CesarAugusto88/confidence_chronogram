@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.http.response import Http404, JsonResponse
 from django.contrib.auth.models import User
 import json
-from apps.confidencechronograms.models import Task, Cliente, Funcionario, Chronogram
-from apps.confidencechronograms.forms import TaskForm, ChronogramForm
+from apps.confidencechronograms.models import Task, Cliente, Funcionario, Chronogram, Comentario
+from apps.confidencechronograms.forms import TaskForm, ChronogramForm, ComentarioForm
 
 
 #def index(request):
@@ -416,3 +416,127 @@ def delete_task(request, id):
     return redirect("task_list")
 
 
+# Comentário do Cliente
+# FUNÇÕES DE UPLOAD
+@login_required(login_url="/login/")
+def uploadcomentario(request):
+    """Essa função carrega o arquivo do cliente
+       É chamada pelo cliente(específico) enviar o arquivo/comentario para o funcionário"""
+    context = {}
+
+    if request.method == "POST":
+        uploaded_file = request.FILES["document"]
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context["url"] = fs.url(name)
+    return render(request, "uploadcomentario.html", context)
+
+#Lista comentario dos clientes
+@login_required(login_url="/login/")
+def comentario_list(request):
+    """ Lista comentario do Cliente """
+    usuario = request.user
+    dados = {}
+    try:
+        cliente = Cliente.objects.get(usuario_cli=usuario)
+        # funcionario = Funcionario.objects.all()
+    except Exception:
+        raise Http404()
+
+    #NÃO ESTÁ PEGANDO O CLIENTE ESPECÍFICO QUE LANÇOU OS comentarioS
+    # VERIFICAR TAMBÉM EM OUTRA FUNÇÕES
+    if cliente:
+        #OK esta pegando so os comentarios referentes ao cliente que criou
+        #***É preciso atribuir automaticamente o cliente_ch***
+        comentarios = Comentario.objects.filter(cliente=cliente)
+        #print(cliente.nome)
+        
+        # se precisar dos dados do cliente
+        dados = {"cliente": cliente, "comentarios": comentarios}
+    else:
+        raise Http404()
+
+    return render(request, "comentario_list.html", dados)
+
+#Lista comentario para funcionários
+@login_required(login_url="/login/")
+def comentario_list_fun(request):
+    """ Lista comentario Para Funcionário Específico. """
+    usuario = request.user
+    dados = {}
+    try:
+        funcionario = Funcionario.objects.get(usuario_fun=usuario)
+    except Exception:
+        raise Http404()
+    if funcionario:
+        comentarios = Comentario.objects.filter(funcionario=funcionario)
+        dados = {"funcionario": funcionario, "comentarios": comentarios}
+    else:
+        raise Http404()
+
+    return render(request, "comentario_list_fun.html", dados)
+
+
+
+@login_required(login_url="/login/")
+def criar_comentario(request):
+    """ Cria formulário do comentario e envia objeto cliente para pegar id.
+    """
+    usuario = request.user
+    # é preciso pegar usuario com 'get' para atribuir em cliente de comentario.
+    usuario_cli = Cliente.objects.get(usuario_cli=usuario)
+    #print(usuario_cli)
+    if request.method == "POST":
+        form = ComentarioForm(request.POST, request.FILES)
+        if form.is_valid():
+            novo = Comentario(cliente=usuario_cli, **form.cleaned_data)
+            novo.save()
+            return redirect("comentario_list")
+    else:
+        form = ComentarioForm()
+    return render(request, "criar_comentario.html", {"form": form})
+
+# Update Comentário
+@login_required(login_url="/login/")
+def update_comentario(request, id):
+    """ Atualiza Comentário."""
+    comentario = Comentario.objects.get(id=id)
+    form = ComentarioForm(request.POST or None, instance=comentario)
+    if form.is_valid():
+        form.save()
+        return redirect("comentario_list")
+    return render(request, "comentario_update.html", {"form": form, 'comentario': comentario})
+
+@login_required(login_url="/login/")
+def delete_comentario(request, id):
+    if request.method == "POST":
+        comentario = Comentario.objects.get(id=id)
+        comentario.delete()
+    return redirect("comentario_list")
+
+# Valores das tarefas
+@login_required(login_url="/login/")
+def price_task(request):
+    """ Lista valores das tarefas"""
+    context = {}
+    cliente = request.user
+    try:
+        cliente = Cliente.objects.get(usuario_cli=cliente)
+        # filter mostra como está a saida em __str__
+        # do models da classe
+        #cronograma = Chronogram.objects.filter(client=cliente)
+        # get mostra od atributos do objeto
+        # e assim pope-se colocar qual atributo
+        cronograma = Chronogram.objects.get(client=cliente)
+    except Exception:
+        raise Http404()
+    if cliente:
+
+        tasks = Task.objects.filter(chronogram=cronograma.id)
+        # se precisar dos dados do cliente
+        context = {
+            "tasks": tasks, "cliente": cliente, 'cronograma': cronograma
+        }
+    else:
+        raise Http404()
+    return render(request, "valores_list.html", context)

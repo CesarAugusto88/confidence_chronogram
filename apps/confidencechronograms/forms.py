@@ -1,6 +1,6 @@
 from django import forms
 
-from apps.confidencechronograms.models import Cliente, Funcionario, Task, Chronogram
+from apps.confidencechronograms.models import Cliente, Funcionario, Task, Chronogram,Comentario
 
 
 class ClienteForm(forms.ModelForm):
@@ -33,3 +33,7 @@ class ChronogramForm(forms.ModelForm):
             'construction', 'client', 'owner', 'address',
             'total_time', 'total_price'
             )
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ('nome_cliente', 'assunto', 'descricao', 'arquivo', 'funcionario')

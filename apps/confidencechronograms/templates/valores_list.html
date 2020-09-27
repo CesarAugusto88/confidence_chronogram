@@ -1,0 +1,33 @@
+{% extends 'base-cliente.html' %}
+
+{% block content %}
+<div class="content-ribbon">
+  {% block content_header %}
+    <h2>Valores das Tarefas</h2>
+    
+  {% endblock %}
+  <div class="pure-u-1">
+    <table class="pure-table pure-table-bordered">
+      <thead>
+        <tr>
+          <th>Nome da Tarefa</th>
+          <th>Início</th>
+          <th>Fim</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td>{{ task.name }}</td>
+            <td>{{ task.start_date }}</td>
+            <td>{{ task.end_date }}</td>
+            <td>{{ task.price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <!--Mostrar o Total...-->
+  </div>
+</div>
+{% endblock %}
