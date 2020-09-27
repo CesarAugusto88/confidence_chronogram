@@ -59,6 +59,9 @@ urlpatterns = [
     path("confidencechronogram/comentarios/funcionario", views.comentario_list_fun, name="comentario_list_fun"),
     #Valores de tarefas
     path("confidencechronogram/task/price", views.price_task, name="price_task"),
+    
+    #relatório PDF
+    re_path(r'^pdf/$', views.GeneratePDF.as_view(), name="relatorio"),
 
     # Para aparecer arquivos do diretório media quando DEBUG=False
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 

@@ -2,12 +2,18 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-# from datetime import datetime, timedelta
 from django.http.response import Http404, JsonResponse
 from django.contrib.auth.models import User
 import json
 from apps.confidencechronograms.models import Task, Cliente, Funcionario, Chronogram, Comentario
 from apps.confidencechronograms.forms import TaskForm, ChronogramForm, ComentarioForm
+
+from django.http import HttpResponse
+from django.views.generic import View
+import datetime #timedelta
+
+from apps.confidencechronograms.utils import render_to_pdf #created in step 4
+
 
 
 #def index(request):
@@ -517,7 +523,7 @@ def delete_comentario(request, id):
 # Valores das tarefas
 @login_required(login_url="/login/")
 def price_task(request):
-    """ Lista valores das tarefas"""
+    """ Lista de nomes, datas e VALORES das tarefas"""
     context = {}
     cliente = request.user
     try:
@@ -540,3 +546,39 @@ def price_task(request):
     else:
         raise Http404()
     return render(request, "valores_list.html", context)
+
+class GeneratePDF(View):
+    """Gerar pdf de relatório para cliente."""
+    def get(self, request, *args, **kwargs):
+        context = {}
+        cliente = request.user
+        try:
+            cliente = Cliente.objects.get(usuario_cli=cliente)
+            # filter mostra como está a saida em __str__
+            # do models da classe
+            #cronograma = Chronogram.objects.filter(client=cliente)
+            # get mostra od atributos do objeto
+            # e assim pope-se colocar qual atributo
+            cronograma = Chronogram.objects.get(client=cliente)
+        except Exception:
+            raise Http404()
+        if cliente:
+            tasks = Task.objects.filter(chronogram=cronograma.id)
+            # se precisar dos dados do cliente
+            context = {
+                "tasks": tasks, "cliente": cliente, "chronogram": cronograma, 
+                "today": datetime.date.today()
+            }
+            # data = {
+            #     'today': datetime.date.today(), 
+            #     'amount': 39.99,
+            #     'customer_name': 'Cooper Mann',
+            #     'order_id': 1233434,
+            # }
+            pdf = render_to_pdf('relatorio.html', context)
+
+            
+        else:
+            raise Http404()
+        
+        return HttpResponse(pdf, content_type='confidencechronograms/pdf')
