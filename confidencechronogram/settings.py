@@ -144,9 +144,15 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/confidencechronogram/'
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 #Configurations e-mail
-EMAIL_HOST = 'http://mail.devsys.com.br'
-EMAIL_PORT = 2079
-EMAIL_HOST_USER = 'cesar@devsys.com.br'
-EMAIL_HOST_PASSWORD = config('SECRET_EMAIL')
+# EMAIL_HOST = 'http://mail.devsys.com.br'
+# EMAIL_PORT = 
+# EMAIL_HOST_USER = config('MY_EMAIL')
+# EMAIL_HOST_PASSWORD = config('SECRET_EMAIL')
+# EMAIL_USE_TLS = True
 EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'cesarcosta.augustos@gmail.com'
+EMAIL_HOST_PASSWORD = config('SECRET_EMAIL')

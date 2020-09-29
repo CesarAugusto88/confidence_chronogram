@@ -59,6 +59,8 @@ urlpatterns = [
     path("confidencechronogram/comentarios/funcionario", views.comentario_list_fun, name="comentario_list_fun"),
     #Valores de tarefas
     path("confidencechronogram/task/price", views.price_task, name="price_task"),
+    #Email-views
+    #path("confidencechronogram/sendmail", views.e_mail, name="e_mail"),
     
     #relatório PDF
     re_path(r'^pdf/$', views.GeneratePDF.as_view(), name="relatorio"),

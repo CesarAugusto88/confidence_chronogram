@@ -14,6 +14,9 @@ import datetime #timedelta
 
 from apps.confidencechronograms.utils import render_to_pdf #created in step 4
 
+from confidencechronogram import settings
+from django.core.mail import send_mail
+
 
 
 #def index(request):
@@ -582,3 +585,16 @@ class GeneratePDF(View):
             raise Http404()
         
         return HttpResponse(pdf, content_type='confidencechronograms/pdf')
+
+
+# EMAIL
+# def e_mail(request):
+#     subject = "Real programmer contact"
+#     msg = "Congratulations for your success"
+#     to = "cesarcosta.augustos@gmail.com"
+#     res = send_mail(subject, msg, settings.EMAIL_HOST_USER, [to])
+#     if(res == 1):
+#         msg = "Mail Sent"
+#     else:
+#         msg = "Mail could not sent"
+#     return HttpResponse(msg)
