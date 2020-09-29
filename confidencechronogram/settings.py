@@ -18,7 +18,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['confidence.devsys.com.br', 'www.confidence.devsys.com.br', '127.0.0.1', 'localhost']
 
+INTERNAL_IPS = ['127.0.0.1']
 
+ADMINS = [('Cesar', 'cesar@devsys.com.br')]
 
 # Apps
 INSTALLED_APPS = [
@@ -152,7 +154,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 # EMAIL_HOST_PASSWORD = config('SECRET_EMAIL')
 # EMAIL_USE_TLS = True
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'mail.devsys.com.br'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'cesarcosta.augustos@gmail.com'
+EMAIL_HOST_USER = 'cesar@devsys.com.br'
 EMAIL_HOST_PASSWORD = config('SECRET_EMAIL')

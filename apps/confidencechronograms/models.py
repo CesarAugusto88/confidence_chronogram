@@ -1,11 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-from confidencechronogram import settings
-from django.http import HttpResponse
-
-from django.core.mail import send_mail
+from django.core.mail import send_mail, mail_admins
 from django.template.loader import render_to_string
+from confidencechronogram import settings
 
 
 class ChronogramManager(models.Manager):
@@ -197,28 +194,22 @@ class Task(models.Model):
 #             "custom_class": "bar-milestone" # optional
 #         },
 #
-    # def save(self, *args, **kwargs):
-    #     super(Task, self).save(*args, **kwargs)
-    #     data = {'tarefa': self.name}
-    #     plain_text = render_to_string('emails/cliente.txt', data)
-    #     html_email = render_to_string('emails/cliente.html', data)
-    #     send_mail(
-    #         'Tarefa cadastrada...',
-    #         plain_text,
-    #         'cesar@devsys.com.br',
-    #         ['cesar@devsys.com.br', 'cesarcosta.augustos@gmail.com'],
-    #         html_message=html_email,
-    #         fail_silently=True, #False erro. Então, basicamente, se for verdade, você não obterá nenhum log ou erro de um e-mail enviado com falha
-    #     )
-    #     print(plain_text)
+
     def save(self, *args, **kwargs):
         super(Task, self).save(*args, **kwargs)
-        data = {'tarefa': self.name, 'descricao': self.task_text}
+        data = {
+            'tarefa': self.name, 'descricao': self.task_text
+        }
         plain_text = render_to_string('emails/cliente.txt', data)
         html_email = render_to_string('emails/cliente.html', data)
         subject = "Tarefa Cadastrada/Alterada"
         to = "cesarcosta.augustos@gmail.com"
-        res = send_mail(subject, plain_text, settings.EMAIL_HOST_USER, [to], html_email)
+        send_mail(
+            subject, plain_text, settings.EMAIL_HOST_USER, [to], html_email
+        )
+        mail_admins(
+            subject, plain_text, settings.EMAIL_HOST_USER
+        )
 
 
     def __str__(self):
@@ -246,29 +237,23 @@ class Comentario(models.Model):
         "Cliente", on_delete=models.PROTECT, related_name='cliente'
         )
 
-    #Emails
-    # def save(self, *args, **kwargs):
-    #     super(Comentario, self).save(*args, **kwargs)
-    #     data = {'cliente': self.nome_cliente}
-    #     plain_text = render_to_string('emails/cliente_comentario.txt', data)
-    #     html_email = render_to_string('emails/cliente_comentario.html', data)
-    #     send_mail(
-    #         'Chamado enviado.',
-    #         plain_text,
-    #         'cesar@devsys.com.br',
-    #         ['cesar@devsys.com.br'],
-    #         html_message=html_email,
-    #         fail_silently=True, #False erro
-    #     )
-    #     print(plain_text)
+
     def save(self, *args, **kwargs):
         super(Comentario, self).save(*args, **kwargs)
-        data = {'cliente': self.nome_cliente}
+        data = {
+            'cliente': self.nome_cliente, 'descricao': self.descricao,
+            'funcionario': self.funcionario.nome
+        }
         plain_text = render_to_string('emails/cliente_comentario.txt', data)
         html_email = render_to_string('emails/cliente_comentario.html', data)
         subject = "Comentário Enviado/Alterado"
         to = "cesarcosta.augustos@gmail.com"
-        res = send_mail(subject, plain_text, settings.EMAIL_HOST_USER, [to], html_email)
+        send_mail(
+            subject, plain_text, settings.EMAIL_HOST_USER, [to], html_email
+        )
+        mail_admins(
+            subject, plain_text, settings.EMAIL_HOST_USER
+        )
    
     # classe Meta serve p modificar nomes e plural
     class Meta:
