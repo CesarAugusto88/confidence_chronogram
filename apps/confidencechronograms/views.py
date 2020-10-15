@@ -542,7 +542,7 @@ def price_task(request):
     if cliente:
 
         tasks = Task.objects.filter(chronogram=cronograma.id)
-        # se precisar dos dados do cliente
+
         context = {
             "tasks": tasks, "cliente": cliente, 'cronograma': cronograma
         }
@@ -567,10 +567,13 @@ class GeneratePDF(View):
             raise Http404()
         if cliente:
             tasks = Task.objects.filter(chronogram=cronograma.id)
-            # se precisar dos dados do cliente
+            soma = 0
+            for task in tasks:
+                soma += task.price
+
             context = {
                 "tasks": tasks, "cliente": cliente, "chronogram": cronograma, 
-                "today": datetime.date.today()
+                "today": datetime.date.today(), "soma": soma,
             }
             # data = {
             #     'today': datetime.date.today(), 
@@ -587,7 +590,7 @@ class GeneratePDF(View):
         return HttpResponse(pdf, content_type='confidencechronograms/pdf')
 
 
-# EMAIL
+# EMAIL- em models
 # def e_mail(request):
 #     subject = "Real programmer contact"
 #     msg = "Congratulations for your success"

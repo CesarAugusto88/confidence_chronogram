@@ -86,8 +86,10 @@
     </div>
   </nav>
 <div class="content" style="padding-top: 45px;">
-	{% block content %}{% endblock %}  <!--serve como place holder para colocar conteúdo -->
-	<div class="footer text-center" style="background-color: rgb(145, 145, 240);">
+  <div class="content" style="padding-left: 45px; padding-right: 45px; padding-bottom: 45px;">
+	  {% block content %}{% endblock %}  <!--serve como place holder para colocar conteúdo -->
+  </div>  
+  <div class="footer text-center" style="background-color: rgb(145, 145, 240);">
     <p>Copyright &copy; Confidence Chronogram {% now "Y" as current_year %} {{ current_year }}</p>
   </div>
 </div>
