@@ -473,7 +473,7 @@ def comentario_list(request):
         termo_pesquisa = request.GET.get('pesquisa', None)
         # PESQUISAS DEVEM ESTAR DIRETO EM MODEL PESQUISANDO
         if termo_pesquisa:
-            comentarios = Comentario.objects.all()
+            comentarios = Comentario.objects.filter(cliente=cliente)
             #__icontains sem case sensitive
             comentarios = comentarios.filter(assunto__icontains=termo_pesquisa)
         else:
@@ -502,7 +502,7 @@ def comentario_list_fun(request):
         #id pesquisa
         termo_pesquisa = request.GET.get('pesquisa', None)
         if termo_pesquisa:
-            comentarios = Comentario.objects.all()
+            comentarios = Comentario.objects.filter(funcionario=funcionario)
             #__icontains sem case sensitive
             comentarios = comentarios.filter(assunto__icontains=termo_pesquisa)
         else:
@@ -572,7 +572,7 @@ def price_task(request):
         termo_pesquisa = request.GET.get('pesquisa', None)
         # PESQUISAS DEVEM ESTAR DIRETO EM MODEL PESQUISANDO
         if termo_pesquisa:
-            tasks = Task.objects.all()
+            tasks = Task.objects.filter(chronogram=cronograma.id)
             #__icontains sem case sensitive
             tasks = tasks.filter(name__icontains=termo_pesquisa)
         else:
