@@ -4,6 +4,13 @@
 <div class="content-ribbon" style="padding-top: 1rem;">
   {% block content_header %}
     <h2>Cronogramas</h2>
+    <form action="" class="pure-form">
+      <fieldset>
+          <legend>Pesquisa de Cronogramas</legend>
+          <input type="text" size="30" id="pesquisa" name="pesquisa" placeholder="Construção"/>
+          <button type="submit" class="pure-button pure-button-primary">Pesquisar</button>
+      </fieldset>
+    </form>
     <a class="navbar-brand pure-button pure-button-primary btn-sm" 
     href="{% url 'new_chronogram' %}">
         <span class="icono-plus" aria-hidden="true"></span>

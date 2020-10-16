@@ -337,7 +337,14 @@ def chronogram_list(request):
         raise Http404()
 
     if funcionario:
-        cronogramas = Chronogram.objects.all()
+        #id pesquisa
+        termo_pesquisa = request.GET.get('pesquisa', None)
+        if termo_pesquisa:
+            cronogramas = Chronogram.objects.all()
+            #__icontains sem case sensitive
+            cronogramas = cronogramas.filter(construction__icontains=termo_pesquisa)
+        else:
+            cronogramas = Chronogram.objects.all()
         dados = {"cronogramas": cronogramas}
     else:
         raise Http404()
@@ -387,7 +394,14 @@ def task_list(request):
     except Exception:
         raise Http404()
     if funcionario:
-        tasks = Task.objects.all()
+        #id pesquisa
+        termo_pesquisa = request.GET.get('pesquisa', None)
+        if termo_pesquisa:
+            tasks = Task.objects.all()
+            #__icontains sem case sensitive
+            tasks = tasks.filter(name__icontains=termo_pesquisa)
+        else:
+            tasks = Task.objects.all()
         dados = {"tasks": tasks}
     else:
         raise Http404()
@@ -455,11 +469,18 @@ def comentario_list(request):
     #NÃO ESTÁ PEGANDO O CLIENTE ESPECÍFICO QUE LANÇOU OS comentarioS
     # VERIFICAR TAMBÉM EM OUTRA FUNÇÕES
     if cliente:
-        #OK esta pegando so os comentarios referentes ao cliente que criou
-        #***É preciso atribuir automaticamente o cliente_ch***
-        comentarios = Comentario.objects.filter(cliente=cliente)
-        #print(cliente.nome)
-        
+        #id pesquisa
+        termo_pesquisa = request.GET.get('pesquisa', None)
+        # PESQUISAS DEVEM ESTAR DIRETO EM MODEL PESQUISANDO
+        if termo_pesquisa:
+            comentarios = Comentario.objects.all()
+            #__icontains sem case sensitive
+            comentarios = comentarios.filter(assunto__icontains=termo_pesquisa)
+        else:
+            #OK esta pegando so os comentarios referentes ao cliente que criou
+            #***É preciso atribuir automaticamente o cliente_ch***
+            comentarios = Comentario.objects.filter(cliente=cliente)
+            #print(cliente.nome)
         # se precisar dos dados do cliente
         dados = {"cliente": cliente, "comentarios": comentarios}
     else:
@@ -478,7 +499,14 @@ def comentario_list_fun(request):
     except Exception:
         raise Http404()
     if funcionario:
-        comentarios = Comentario.objects.filter(funcionario=funcionario)
+        #id pesquisa
+        termo_pesquisa = request.GET.get('pesquisa', None)
+        if termo_pesquisa:
+            comentarios = Comentario.objects.all()
+            #__icontains sem case sensitive
+            comentarios = comentarios.filter(assunto__icontains=termo_pesquisa)
+        else:
+            comentarios = Comentario.objects.filter(funcionario=funcionario)
         dados = {"funcionario": funcionario, "comentarios": comentarios}
     else:
         raise Http404()
@@ -540,8 +568,17 @@ def price_task(request):
     except Exception:
         raise Http404()
     if cliente:
-
-        tasks = Task.objects.filter(chronogram=cronograma.id)
+        #id pesquisa
+        termo_pesquisa = request.GET.get('pesquisa', None)
+        # PESQUISAS DEVEM ESTAR DIRETO EM MODEL PESQUISANDO
+        if termo_pesquisa:
+            tasks = Task.objects.all()
+            #__icontains sem case sensitive
+            tasks = tasks.filter(name__icontains=termo_pesquisa)
+        else:
+            #OK esta pegando so os comentarios referentes ao cliente que criou
+            #***É preciso atribuir automaticamente o cliente_ch***
+            tasks = Task.objects.filter(chronogram=cronograma.id)
 
         context = {
             "tasks": tasks, "cliente": cliente, 'cronograma': cronograma
