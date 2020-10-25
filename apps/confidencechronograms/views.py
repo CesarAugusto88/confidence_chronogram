@@ -178,6 +178,7 @@ def submit_cliente(request):
     if request.POST:
         nome = request.POST.get("nome")
         fone1 = request.POST.get("fone1")
+        email = request.POST.get("email")
         endereco = request.POST.get("endereco")
         cidade = request.POST.get("cidade")
         cep = request.POST.get("cep")
@@ -190,6 +191,7 @@ def submit_cliente(request):
             if cliente.usuario_cli == usuario_cli:
                 cliente.nome = nome
                 cliente.fone1 = fone1
+                cliente.email = email
                 cliente.endereco = endereco
                 cliente.cidade = cidade
                 cliente.cep = cep

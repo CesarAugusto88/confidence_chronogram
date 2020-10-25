@@ -198,12 +198,13 @@ class Task(models.Model):
     def save(self, *args, **kwargs):
         super(Task, self).save(*args, **kwargs)
         data = {
-            'tarefa': self.name, 'descricao': self.task_text
+            'tarefa': self.name, 'descricao': self.task_text,
+            'progresso': self.progress
         }
         plain_text = render_to_string('emails/cliente.txt', data)
         html_email = render_to_string('emails/cliente.html', data)
         subject = "Tarefa Cadastrada/Alterada"
-        to = "cesarcosta.augustos@gmail.com"
+        to = self.chronogram.client.email
         send_mail(
             subject, plain_text, settings.EMAIL_HOST_USER, [to], html_email
         )
@@ -247,7 +248,7 @@ class Comentario(models.Model):
         plain_text = render_to_string('emails/cliente_comentario.txt', data)
         html_email = render_to_string('emails/cliente_comentario.html', data)
         subject = "Comentário Enviado/Alterado"
-        to = "cesarcosta.augustos@gmail.com"
+        to = self.funcionario.email
         send_mail(
             subject, plain_text, settings.EMAIL_HOST_USER, [to], html_email
         )
