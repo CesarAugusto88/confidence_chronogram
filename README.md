@@ -9,7 +9,7 @@ Sistema Web de Gerenciamento de Cronogramas Físico-Financeiro
 ##### Servidor teste na plataforma Heroku
 ##
 
-![GitHub](https://img.shields.io/github/license/CesarAugusto88/confidence_chronogram
+![GitHub](https://img.shields.io/github/license/CesarAugusto88/confidence_chronogram)
 
 ##
 
